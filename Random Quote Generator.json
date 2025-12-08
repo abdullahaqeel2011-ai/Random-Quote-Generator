@@ -1,0 +1,168 @@
+{
+  "name": "Random Quote Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -64
+      ],
+      "id": "0e410f26-f416-448c-8df2-76afa2fcd121",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d9dd0192-0c50-494d-a831-b1f7d6d6651f",
+              "name": "quote",
+              "value": "[\"Believe you can and you're halfway there.\",\"Success is not final, failure is not fatal\",\"Do something today your future self will thank you for\",\"Dream big and dare to fail\"]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        -64
+      ],
+      "id": "7bf5bac0-4dfd-414d-a24b-35010055b467",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "01ddc27e-12f8-486d-9ca8-ce5aabb28a14",
+              "name": "=RandomQuote",
+              "value": "=={{ JSON.parse($json.quote)[Math.floor(Math.random() * JSON.parse($json.quote).length)] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -128,
+        -64
+      ],
+      "id": "2173af20-a702-4a02-836b-194f3c2a1d50",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96b0ad8a-57f6-4f57-a218-bc9d59d85a43",
+              "name": "DisplayedQuote",
+              "value": "={{ $json.RandomQuote }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        -64
+      ],
+      "id": "32c62f8e-8de4-47ae-aca6-48be1e82ed1c",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "sendTo": "camilajohn901@gmail.com",
+        "subject": "Your Random Quote",
+        "message": "={{ $json.DisplayedQuote }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        288,
+        -64
+      ],
+      "id": "8f42f325-97a1-4493-9cac-22c0285fabc5",
+      "name": "Send a message",
+      "webhookId": "5fbc5c89-fc62-471d-a952-b894967a8c94",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ELhtGUwioCS5QBIa",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0d417daf-d065-4318-9e72-02df94300782",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3d376027b7c5e00d0af30dd4d2431447f6f406c74dbb5c35ace90a073f26d18c"
+  },
+  "id": "ZfYsMGo44n2QE3fi",
+  "tags": []
+}
