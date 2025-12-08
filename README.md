@@ -76,7 +76,6 @@ Connect to Slack, WhatsApp, or other tools (optional)
 n8n (Self-hosted or Cloud)
 
 📄 License
-
 Licensed for educational and commercial use.
 
 👤 Author
